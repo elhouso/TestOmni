@@ -1,673 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omni World - Minecraft Geopolitical Server</title>
-    <link href="https://fonts.googleapis.com/css2?family=Expressway:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Omni World - Minecraft Server</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Expressway', sans-serif;
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+    body {
+      background-color: #171a1c;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+    }
 
-        .nav-sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            height: 100vh;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 2rem 0;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
+    header {
+      background-color: #212529;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
 
-        .nav-sidebar.active {
-            transform: translateX(0);
-        }
+    header h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.2rem;
+      color: #00ff55;
+      letter-spacing: 1px;
+    }
 
-        .nav-toggle {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1001;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            padding: 1rem;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
+    nav a {
+      margin-left: 2rem;
+      color: #00ff55;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.3rem 0.6rem;
+      background: #2e3338;
+      border: 2px solid #00ff55;
+      box-shadow: 0 0 0 2px #000;
+      transition: all 0.2s ease;
+    }
 
-        .nav-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-        }
+    nav a:hover {
+      background: #00ff55;
+      color: #000;
+    }
 
-        .nav-logo {
-            text-align: center;
-            padding: 0 2rem;
-            margin-bottom: 3rem;
-        }
+    section {
+      padding: 6rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-        .nav-logo h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #4CAF50, #8BC34A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
-        .nav-menu {
-            list-style: none;
-            padding: 0 1rem;
-        }
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.4);
+    }
 
-        .nav-item {
-            margin-bottom: 0.5rem;
-        }
+    .hero h2 {
+      font-size: 3rem;
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff55;
+      margin-bottom: 1rem;
+    }
 
-        .nav-link {
-            display: block;
-            padding: 1rem 1.5rem;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
+    .btn-mc {
+      font-family: 'Press Start 2P', monospace;
+      background: #00ff55;
+      border: 2px solid #000;
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+      box-shadow: 4px 4px 0 #000;
+    }
 
-        .nav-link:hover::before {
-            left: 100%;
-        }
+    .btn-mc:hover {
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0 #000;
+    }
 
-        .nav-link:hover {
-            background: rgba(76, 175, 80, 0.2);
-            transform: translateX(10px);
-        }
+    .section-title {
+      font-size: 2rem;
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff55;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
 
-        .nav-submenu {
-            list-style: none;
-            padding-left: 2rem;
-            margin-top: 0.5rem;
-        }
+    .map img {
+      width: 100%;
+      border: 4px solid #00ff55;
+      box-shadow: 6px 6px 0 #000;
+    }
 
-        .nav-submenu .nav-link {
-            padding: 0.7rem 1rem;
-            font-size: 0.9rem;
-            color: #cccccc;
-        }
+    .wiki-category {
+      background: #212529;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      border-left: 6px solid #00ff55;
+    }
 
-        .main-content {
-            margin-left: 0;
-            transition: margin-left 0.4s ease;
-        }
+    .wiki-category h3 {
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff55;
+      margin-bottom: 1rem;
+    }
 
-        .landing-section {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            overflow: hidden;
-        }
+    .wiki-sub {
+      margin-left: 1rem;
+      background: #2e3338;
+      padding: 0.75rem 1rem;
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0 #000;
+    }
 
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
-            opacity: 0.3;
-            animation: backgroundPulse 4s ease-in-out infinite;
-        }
+    .wiki-sub strong {
+      color: #fff;
+      font-weight: bold;
+    }
 
-        .video-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.5);
-            animation: float 6s ease-in-out infinite;
-        }
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 1.8rem;
+      }
 
-        @keyframes backgroundPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
 
-        @keyframes float {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-            50% { transform: translate(-50%, -50%) translateY(-20px); }
-        }
-
-        .landing-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
-        }
-
-        .landing-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .server-title {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #4CAF50, #8BC34A, #CDDC39);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 30px rgba(76, 175, 80, 0.5); }
-            50% { text-shadow: 0 0 50px rgba(76, 175, 80, 0.8); }
-        }
-
-        .server-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            color: #cccccc;
-            font-weight: 600;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        .server-ip {
-            font-size: 2rem;
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border: 2px solid rgba(76, 175, 80, 0.3);
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 1s ease-out 0.7s both;
-            transition: all 0.3s ease;
-        }
-
-        .server-ip:hover {
-            border-color: rgba(76, 175, 80, 0.8);
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
-        }
-
-        .discord-btn {
-            display: inline-block;
-            padding: 1.5rem 3rem;
-            background: linear-gradient(45deg, #7289DA, #5865F2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out 0.9s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .discord-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .discord-btn:hover::before {
-            left: 100%;
-        }
-
-        .discord-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(114, 137, 218, 0.4);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section {
-            min-height: 100vh;
-            padding: 5rem 2rem;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(45deg, #4CAF50, #8BC34A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .map-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .map-placeholder {
-            width: 100%;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .map-placeholder:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.02);
-        }
-
-        .wiki-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .wiki-category {
-            margin-bottom: 3rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .wiki-category:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-5px);
-        }
-
-        .wiki-category-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #4CAF50;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .wiki-category-title::after {
-            content: '▼';
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .wiki-category-title:hover::after {
-            transform: rotate(180deg);
-        }
-
-        .wiki-subcategory {
-            margin-left: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .wiki-subcategory-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #8BC34A;
-        }
-
-        .wiki-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            border-left: 4px solid #4CAF50;
-            transition: all 0.3s ease;
-        }
-
-        .wiki-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateX(10px);
-        }
-
-        .wiki-item h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .wiki-item p {
-            color: #cccccc;
-            line-height: 1.6;
-        }
-
-        .drop-rate {
-            background: rgba(76, 175, 80, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #4CAF50;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #cccccc;
-        }
-
-        @media (max-width: 768px) {
-            .nav-sidebar {
-                width: 250px;
-            }
-            
-            .server-title {
-                font-size: 3rem;
-            }
-            
-            .server-ip {
-                font-size: 1.5rem;
-            }
-            
-            .discord-btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .wiki-subcategory {
-                margin-left: 1rem;
-            }
-        }
-    </style>
+      nav a {
+        margin-left: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <button class="nav-toggle" onclick="toggleNav()">☰</button>
-    
-    <nav class="nav-sidebar" id="sidebar">
-        <div class="nav-logo">
-            <h1>Omni World</h1>
-        </div>
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="#home" class="nav-link" onclick="scrollToSection('home')">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="#map" class="nav-link" onclick="scrollToSection('map')">Map</a>
-            </li>
-            <li class="nav-item">
-                <a href="#wiki" class="nav-link">Wiki</a>
-                <ul class="nav-submenu">
-                    <li class="nav-item">
-                        <a href="#mobs" class="nav-link" onclick="scrollToSection('wiki')">Mobs</a>
-                        <ul class="nav-submenu">
-                            <li class="nav-item">
-                                <a href="#items-drops" class="nav-link" onclick="scrollToSection('wiki')">Items + Drop Rates</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#items" class="nav-link" onclick="scrollToSection('wiki')">Items</a>
-                        <ul class="nav-submenu">
-                            <li class="nav-item">
-                                <a href="#stats" class="nav-link" onclick="scrollToSection('wiki')">Stats</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+  <header>
+    <h1>Omni World</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#map">Map</a>
+      <a href="#wiki">Wiki</a>
     </nav>
+  </header>
 
-    <div class="main-content">
-        <section id="home" class="landing-section">
-            <div class="video-background">
-                <div class="video-placeholder">▶</div>
-            </div>
-            <div class="landing-overlay"></div>
-            <div class="landing-content">
-                <h1 class="server-title">OMNI WORLD</h1>
-                <p class="server-subtitle">The Ultimate Minecraft Geopolitical Experience</p>
-                <div class="server-ip">play.omniworld.net</div>
-                <a href="#" class="discord-btn">Join Discord</a>
-            </div>
-        </section>
+  <section class="hero" id="home">
+    <video autoplay muted loop>
+      <source src="trailer.mp4" type="video/mp4"/>
+    </video>
+    <h2>Omni World</h2>
+    <p>IP: <strong>play.omniworld.net</strong></p>
+    <a class="btn-mc" href="#">Join Our Discord</a>
+  </section>
 
-        <section id="map" class="section">
-            <h2 class="section-title">World Map</h2>
-            <div class="map-container">
-                <div class="map-placeholder">
-                    🗺️ Interactive World Map Coming Soon
-                </div>
-            </div>
-        </section>
+  <section id="map">
+    <h2 class="section-title">Map</h2>
+    <div class="map">
+      <img src="map-placeholder.jpg" alt="World Map">
+    </div>
+  </section>
 
-        <section id="wiki" class="section">
-            <h2 class="section-title">Wiki</h2>
-            <div class="wiki-container">
-                <div class="wiki-category">
-                    <h3 class="wiki-category-title">Mobs</h3>
-                    <div class="wiki-subcategory">
-                        <h4 class="wiki-subcategory-title">Items + Drop Rates</h4>
-                        <div class="wiki-item">
-                            <h4>Ender Dragon</h4>
-                            <p>The most powerful mob in Omni World, guarding the End dimension.</p>
-                            <div class="drop-rate">
-                                <strong>Drop Rates:</strong><br>
-                                Dragon Egg: 100% | Dragon Head: 50% | End Crystals: 25%
-                            </div>
-                        </div>
-                        <div class="wiki-item">
-                            <h4>Wither Boss</h4>
-                            <p>A three-headed undead boss that brings destruction wherever it goes.</p>
-                            <div class="drop-rate">
-                                <strong>Drop Rates:</strong><br>
-                                Nether Star: 100% | Wither Skull: 15% | Soul Sand: 80%
-                            </div>
-                        </div>
-                        <div class="wiki-item">
-                            <h4>Ancient Guardian</h4>
-                            <p>A rare ocean monument boss with enhanced abilities.</p>
-                            <div class="drop-rate">
-                                <strong>Drop Rates:</strong><br>
-                                Prismarine Crystals: 90% | Sea Lantern: 75% | Sponge: 100%
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <section id="wiki">
+    <h2 class="section-title">Wiki</h2>
 
-                <div class="wiki-category">
-                    <h3 class="wiki-category-title">Items</h3>
-                    <div class="wiki-subcategory">
-                        <h4 class="wiki-subcategory-title">Stats</h4>
-                        <div class="wiki-item">
-                            <h4>Omni Sword</h4>
-                            <p>A legendary blade forged from the essence of all dimensions.</p>
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <div class="stat-value">25</div>
-                                    <div class="stat-label">Attack Damage</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">1.6</div>
-                                    <div class="stat-label">Attack Speed</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">2500</div>
-                                    <div class="stat-label">Durability</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wiki-item">
-                            <h4>Dimensional Armor Set</h4>
-                            <p>Complete armor set that provides protection across all dimensions.</p>
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <div class="stat-value">20</div>
-                                    <div class="stat-label">Armor Points</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">12</div>
-                                    <div class="stat-label">Toughness</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">3000</div>
-                                    <div class="stat-label">Durability</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wiki-item">
-                            <h4>Portal Staff</h4>
-                            <p>A mystical staff that allows instant travel between dimensions.</p>
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <div class="stat-value">15</div>
-                                    <div class="stat-label">Magic Damage</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">100</div>
-                                    <div class="stat-label">Mana Cost</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">1000</div>
-                                    <div class="stat-label">Durability</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="wiki-category">
+      <h3>Mobs</h3>
+      <div class="wiki-sub">
+        <strong>Items & Drop Rates</strong><br>
+        Zombie: Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)
+      </div>
     </div>
 
-    <script>
-        function toggleNav() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            element.scrollIntoView({ behavior: 'smooth' });
-            
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.remove('active');
-        }
-
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.querySelector('.nav-toggle');
-            
-            if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
-
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.video-background');
-            const speed = scrolled * 0.5;
-            
-            if (parallax) {
-                parallax.style.transform = `translateY(${speed}px)`;
-            }
-        });
-    </script>
+    <div class="wiki-category">
+      <h3>Items</h3>
+      <div class="wiki-sub">
+        <strong>Stats</strong><br>
+        Mythril Sword - Damage: 12, Durability: 750, Special: Bleeding effect
+      </div>
+    </div>
+  </section>
 </body>
 </html>
