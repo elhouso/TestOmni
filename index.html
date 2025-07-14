@@ -5,6 +5,7 @@
   <title>Omni World - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <script defer src="script.js"></script>
 </head>
 <body class="dark">
@@ -16,8 +17,6 @@
     <div class="nav">
       <span class="nav-item active" data-page="home">HOME</span>
       <span class="divider">|</span>
-      <span class="nav-item" data-page="wiki">WIKI</span>
-      <span class="divider">|</span>
       <span class="nav-item" data-page="discord">DISCORD</span>
       <span class="divider">|</span>
       <span class="nav-item" data-page="map">MAP</span>
@@ -26,27 +25,31 @@
     <div class="theme-toggle" id="themeToggle">🌙</div>
 
     <div class="content" id="home">
-      <p>Insert server trailer vid here</p>
-    </div>
-
-    <div class="content" id="wiki" style="display: none;">
-      <p>Traditional crawling wiki I can add items, mobs, features and their characteristics.</p>
-      <p>Also a place to sort out server commands for:</p>
-      <ul>
-        <li>Teleports</li>
-        <li>Residents</li>
-        <li>Towns</li>
-        <li>Nations</li>
-      </ul>
+      <h2><span class="underline">Omni World</span> About</h2>
+      <p>Placeholder text for Omni World intro...</p>
+      <div class="embed-box">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+        frameborder="0" allowfullscreen></iframe>
+      </div>
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="button">Watch on YouTube</a>
     </div>
 
     <div class="content" id="discord" style="display: none;">
-      <p>Discord link and a brief lore of the Legend and Legacy ranks for content.</p>
+      <h2>Legend & Legacy Ranks</h2>
+      <p>Placeholder text about Discord roles...</p>
+      <a href="https://discord.gg/NVrv5AT9Vk" target="_blank" class="button">Join Our Discord</a>
+      <iframe src="https://discord.com/widget?id=707408392716681228&theme=dark" width="100%" height="300" 
+      allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </div>
 
     <div class="content" id="map" style="display: none;">
-      <p>Insert map image or video trailer here.</p>
+      <div class="embed-box square">
+        <iframe src="https://map.omwrld.com" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
+      <a href="https://map.omwrld.com" target="_blank" class="button">Open Map in New Tab</a>
     </div>
   </div>
+
+  <footer>&copy; 2025 Omni World. All rights reserved.</footer>
 </body>
 </html>
