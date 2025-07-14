@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Omni World - Minecraft Server</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'ExpresswaySB';
+      src: url('Expressway-SemiBold.woff2') format('woff2'),
+           url('Expressway-SemiBold.woff') format('woff');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,43 +24,49 @@
     body {
       background-color: #171a1c;
       color: #fff;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'ExpresswaySB', sans-serif;
+      overflow-x: hidden;
     }
 
     header {
-      background-color: #212529;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
+      width: 100%;
+      background: #212529;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
       z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
-    header h1 {
-      font-family: 'Press Start 2P', monospace;
+    header .logo {
+      height: 32px;
+      width: 32px;
+      margin-right: 0.5rem;
+    }
+
+    header .title {
+      display: flex;
+      align-items: center;
       font-size: 1.2rem;
-      color: #00ff55;
-      letter-spacing: 1px;
+      color: #3d8526;
+      font-family: 'Press Start 2P', monospace;
     }
 
     nav a {
-      margin-left: 2rem;
-      color: #00ff55;
+      margin-left: 1rem;
+      color: #3d8526;
       text-decoration: none;
       font-weight: bold;
       padding: 0.3rem 0.6rem;
       background: #2e3338;
-      border: 2px solid #00ff55;
-      box-shadow: 0 0 0 2px #000;
+      border: 2px solid #3d8526;
       transition: all 0.2s ease;
     }
 
     nav a:hover {
-      background: #00ff55;
+      background: #3d8526;
       color: #000;
     }
 
@@ -75,18 +90,23 @@
       position: absolute;
       top: 0;
       left: 0;
-      height: 100%;
       width: 100%;
+      height: 100%;
       object-fit: cover;
-      z-index: -1;
       filter: brightness(0.4);
+      z-index: -1;
+    }
+
+    .hero .logo-hero {
+      height: 80px;
+      width: 80px;
+      margin-bottom: 1rem;
     }
 
     .hero h2 {
-      font-size: 3rem;
       font-family: 'Press Start 2P', monospace;
-      color: #00ff55;
-      margin-bottom: 1rem;
+      font-size: 3rem;
+      color: #3d8526;
     }
 
     .hero p {
@@ -94,47 +114,85 @@
       margin-bottom: 2rem;
     }
 
+    .hero p:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
     .btn-mc {
       font-family: 'Press Start 2P', monospace;
-      background: #00ff55;
+      background: #3d8526;
       border: 2px solid #000;
       color: #000;
       padding: 0.75rem 1.5rem;
       text-decoration: none;
       display: inline-block;
-      transition: all 0.2s ease;
       box-shadow: 4px 4px 0 #000;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease;
     }
 
     .btn-mc:hover {
       transform: translateY(-2px);
-      box-shadow: 6px 6px 0 #000;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      top: 0;
+      width: 6px;
+      height: 10px;
+      background: #fff;
+      opacity: 0;
+      animation: fall 1s forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(300px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .section-title {
-      font-size: 2rem;
       font-family: 'Press Start 2P', monospace;
-      color: #00ff55;
-      margin-bottom: 2rem;
+      color: #3d8526;
+      font-size: 2rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .map img {
+    .map iframe {
       width: 100%;
-      border: 4px solid #00ff55;
+      height: 500px;
+      border: 4px solid #3d8526;
       box-shadow: 6px 6px 0 #000;
+      transition: transform 0.3s;
+    }
+
+    .map iframe:hover {
+      transform: scale(1.02);
     }
 
     .wiki-category {
       background: #212529;
       padding: 1rem 1.5rem;
       margin-bottom: 2rem;
-      border-left: 6px solid #00ff55;
+      border-left: 6px solid #3d8526;
+      transition: transform 0.3s;
+    }
+
+    .wiki-category:hover {
+      transform: scale(1.02);
     }
 
     .wiki-category h3 {
       font-family: 'Press Start 2P', monospace;
-      color: #00ff55;
+      color: #3d8526;
       margin-bottom: 1rem;
     }
 
@@ -146,31 +204,34 @@
       box-shadow: 4px 4px 0 #000;
     }
 
-    .wiki-sub strong {
-      color: #fff;
-      font-weight: bold;
+    .wavy {
+      display: block;
+      width: 100%;
+      height: 60px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60"><path fill="%2317181c" d="M0,20 C360,80 1080,-40 1440,20 L1440,60 L0,60 Z"/></svg>') no-repeat bottom;
     }
 
     @media (max-width: 768px) {
       .hero h2 {
-        font-size: 1.8rem;
-      }
-
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        font-size: 2rem;
       }
 
       nav a {
-        margin-left: 0;
+        margin-left: 0.5rem;
+      }
+
+      .map iframe {
+        height: 300px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Omni World</h1>
+    <div class="title">
+      <img src="logo.png" class="logo" />
+      <span>Omni World</span>
+    </div>
     <nav>
       <a href="#home">Home</a>
       <a href="#map">Map</a>
@@ -180,17 +241,20 @@
 
   <section class="hero" id="home">
     <video autoplay muted loop>
-      <source src="trailer.mp4" type="video/mp4"/>
+      <source src="trailer.mp4" type="video/mp4" />
     </video>
+    <img src="logo.png" class="logo-hero" />
     <h2>Omni World</h2>
-    <p>IP: <strong>play.omniworld.net</strong></p>
-    <a class="btn-mc" href="#">Join Our Discord</a>
+    <p onclick="copyIP()">IP: <strong id="ip">OmWrld.com</strong></p>
+    <a class="btn-mc" href="#" id="discord-btn">Join Our Discord</a>
   </section>
+
+  <div class="wavy"></div>
 
   <section id="map">
     <h2 class="section-title">Map</h2>
     <div class="map">
-      <img src="map-placeholder.jpg" alt="World Map">
+      <iframe src="https://map.omwrld.com/" allowfullscreen></iframe>
     </div>
   </section>
 
@@ -200,7 +264,7 @@
     <div class="wiki-category">
       <h3>Mobs</h3>
       <div class="wiki-sub">
-        <strong>Items & Drop Rates</strong><br>
+        <strong>Items & Drop Rates</strong><br />
         Zombie: Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)
       </div>
     </div>
@@ -208,10 +272,34 @@
     <div class="wiki-category">
       <h3>Items</h3>
       <div class="wiki-sub">
-        <strong>Stats</strong><br>
-        Mythril Sword - Damage: 12, Durability: 750, Special: Bleeding effect
+        <strong>Stats</strong><br />
+        Mythril Sword - Damage: 12, Durability: 750, Special: Bleeding
       </div>
     </div>
   </section>
+
+  <script>
+    function copyIP() {
+      navigator.clipboard.writeText("OmWrld.com");
+      alert("IP copied to clipboard!");
+    }
+
+    const btn = document.getElementById("discord-btn");
+    btn.addEventListener("mouseenter", () => {
+      for (let i = 0; i < 40; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti-piece");
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        confetti.style.animationDuration = 0.8 + Math.random() * 0.5 + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        btn.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 1000);
+      }
+    });
+  </script>
 </body>
 </html>
