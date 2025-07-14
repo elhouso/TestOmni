@@ -2,98 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Omni World</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      background: #fff;
-      color: #000;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: bold;
-      font-style: italic;
-      margin: 30px 0 10px;
-    }
-
-    .nav {
-      border-top: 2px solid black;
-      border-bottom: 2px solid black;
-      padding: 15px 0;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-    }
-
-    .nav-item {
-      cursor: pointer;
-      padding: 5px 10px;
-    }
-
-    .nav-item.active {
-      background: black;
-      color: white;
-    }
-
-    .divider {
-      color: black;
-    }
-
-    .content {
-      margin-top: 40px;
-      font-size: 18px;
-      padding: 0 20px;
-    }
-
-    .content p {
-      margin-bottom: 12px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+  <title>Omni World - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
 </head>
-<body>
+<body class="dark">
+  <div id="overlay"></div>
 
-  <h1>Omni World</h1>
+  <header>
+    <img src="assets/logo.png" alt="Omni World Logo" class="logo">
+    <nav class="nav">
+      <button class="nav-item active" data-tab="home">HOME</button>
+      <button class="nav-item" data-tab="wiki">WIKI</button>
+      <button class="nav-item" data-tab="discord">DISCORD</button>
+      <button class="nav-item" data-tab="map">MAP</button>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </nav>
+  </header>
 
-  <div class="nav">
-    <div id="wiki-tab" class="nav-item active" onclick="showContent('wiki')">WIKI</div>
-    <span class="divider">|</span>
-    <div id="discord-tab" class="nav-item" onclick="showContent('discord')">DISCORD</div>
-    <span class="divider">|</span>
-    <div id="map-tab" class="nav-item" onclick="showContent('map')">MAP</div>
-  </div>
+  <main>
+    <section id="home" class="tab-content active">
+      <h2>Welcome to Omni World</h2>
+      <p>Insert server trailer vid here</p>
+    </section>
 
-  <div id="wiki" class="content">
-    <p>Traditional crawling wiki I can add items, mobs, features and their characteristics.</p>
-    <p>Also a place to sort out server commands for:</p>
-    <p>Teleports<br>Residents<br>Towns<br>Nations</p>
-  </div>
+    <section id="wiki" class="tab-content">
+      <h2>Wiki</h2>
+      <p>Traditional crawling wiki I can add items, mobs, features and their characteristics.</p>
+      <p>Also a place to sort out server commands for:<br>
+      Teleports<br>Residents<br>Towns<br>Nations</p>
+    </section>
 
-  <div id="discord" class="content" style="display: none;">
-    <p>Discord link and a brief lore of the Legend and Legacy ranks for content</p>
-  </div>
+    <section id="discord" class="tab-content">
+      <h2>Discord</h2>
+      <p>Discord link and a brief lore of the Legend and Legacy ranks for content.</p>
+    </section>
 
-  <div id="map" class="content" style="display: none;">
-    <p>Insert server trailer vid here</p>
-  </div>
-
-  <script>
-    function showContent(tab) {
-      const tabs = ['wiki', 'discord', 'map'];
-      tabs.forEach(t => {
-        document.getElementById(t).style.display = 'none';
-        document.getElementById(t + '-tab').classList.remove('active');
-      });
-      document.getElementById(tab).style.display = 'block';
-      document.getElementById(tab + '-tab').classList.add('active');
-    }
-  </script>
-
+    <section id="map" class="tab-content">
+      <h2>Map</h2>
+      <p>Insert dynamic map or image trailer here.</p>
+    </section>
+  </main>
 </body>
 </html>
