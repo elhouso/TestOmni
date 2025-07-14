@@ -4,45 +4,49 @@
   <meta charset="UTF-8">
   <title>Omni World - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
 <body class="dark">
-  <div id="overlay"></div>
+  <div class="background"></div>
 
-  <header>
+  <div class="container">
     <img src="assets/logo.png" alt="Omni World Logo" class="logo">
-    <nav class="nav">
-      <button class="nav-item active" data-tab="home">HOME</button>
-      <button class="nav-item" data-tab="wiki">WIKI</button>
-      <button class="nav-item" data-tab="discord">DISCORD</button>
-      <button class="nav-item" data-tab="map">MAP</button>
-      <button class="theme-toggle" id="themeToggle">🌙</button>
-    </nav>
-  </header>
 
-  <main>
-    <section id="home" class="tab-content active">
-      <h2>Welcome to Omni World</h2>
+    <div class="nav">
+      <span class="nav-item active" data-page="home">HOME</span>
+      <span class="divider">|</span>
+      <span class="nav-item" data-page="wiki">WIKI</span>
+      <span class="divider">|</span>
+      <span class="nav-item" data-page="discord">DISCORD</span>
+      <span class="divider">|</span>
+      <span class="nav-item" data-page="map">MAP</span>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">🌙</div>
+
+    <div class="content" id="home">
       <p>Insert server trailer vid here</p>
-    </section>
+    </div>
 
-    <section id="wiki" class="tab-content">
-      <h2>Wiki</h2>
+    <div class="content" id="wiki" style="display: none;">
       <p>Traditional crawling wiki I can add items, mobs, features and their characteristics.</p>
-      <p>Also a place to sort out server commands for:<br>
-      Teleports<br>Residents<br>Towns<br>Nations</p>
-    </section>
+      <p>Also a place to sort out server commands for:</p>
+      <ul>
+        <li>Teleports</li>
+        <li>Residents</li>
+        <li>Towns</li>
+        <li>Nations</li>
+      </ul>
+    </div>
 
-    <section id="discord" class="tab-content">
-      <h2>Discord</h2>
+    <div class="content" id="discord" style="display: none;">
       <p>Discord link and a brief lore of the Legend and Legacy ranks for content.</p>
-    </section>
+    </div>
 
-    <section id="map" class="tab-content">
-      <h2>Map</h2>
-      <p>Insert dynamic map or image trailer here.</p>
-    </section>
-  </main>
+    <div class="content" id="map" style="display: none;">
+      <p>Insert map image or video trailer here.</p>
+    </div>
+  </div>
 </body>
 </html>
