@@ -4,42 +4,49 @@
   <meta charset="UTF-8">
   <title>Omni World - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
-<body class="dark">
+<body>
   <div class="background"></div>
 
   <div class="container">
-    <img src="assets/logo.png" alt="Omni World Logo" class="logo">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+      <img src="assets/logo.png" alt="Omni World Logo" class="logo">
+    </a>
 
     <div class="nav">
       <span class="nav-item active" data-page="home">HOME</span>
+      <span class="divider">|</span>
+      <span class="nav-item" data-page="wiki">WIKI</span>
       <span class="divider">|</span>
       <span class="nav-item" data-page="discord">DISCORD</span>
       <span class="divider">|</span>
       <span class="nav-item" data-page="map">MAP</span>
     </div>
 
-    <div class="theme-toggle" id="themeToggle">🌙</div>
-
-    <div class="content" id="home">
+    <div class="content active" id="home">
       <h2><span class="underline">Omni World</span> About</h2>
       <p>Placeholder text for Omni World intro...</p>
       <div class="embed-box">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-        frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
       </div>
       <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="button">Watch on YouTube</a>
+    </div>
+
+    <div class="content" id="wiki" style="display: none;">
+      <h2>Wiki</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis purus sed ante commodo, at tincidunt eros vulputate. Donec sagittis, eros vel pretium viverra, nisi libero dictum neque, et sodales magna elit id elit.</p>
     </div>
 
     <div class="content" id="discord" style="display: none;">
       <h2>Legend & Legacy Ranks</h2>
       <p>Placeholder text about Discord roles...</p>
+      <div class="embed-box square">
+        <iframe src="https://discord.com/widget?id=707408392716681228&theme=dark" width="100%" height="100%" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      </div>
       <a href="https://discord.gg/NVrv5AT9Vk" target="_blank" class="button">Join Our Discord</a>
-      <iframe src="https://discord.com/widget?id=707408392716681228&theme=dark" width="100%" height="300" 
-      allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </div>
 
     <div class="content" id="map" style="display: none;">
