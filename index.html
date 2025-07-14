@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="="en">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Omni World - Minecraft Server</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'ExpresswaySB';
-      src: url('Expressway-SemiBold.woff2') format('woff2'),
-           url('Expressway-SemiBold.woff') format('woff');
+      src: url('Expressway-SemiBold.woff') format('woff');
       font-weight: 600;
       font-style: normal;
       font-display: swap;
@@ -26,11 +25,12 @@
       color: #fff;
       font-family: 'ExpresswaySB', sans-serif;
       overflow-x: hidden;
+      cursor: url('cursor.png'), auto;
+      transition: background 0.3s, color 0.3s;
     }
 
-    header {
-      position: fixed;
-      top: 0;
+    header, footer {
+      position: relative;
       width: 100%;
       background: #212529;
       display: flex;
@@ -40,22 +40,28 @@
       z-index: 1000;
     }
 
-    header .logo {
+    .logo {
       height: 32px;
       width: 32px;
       margin-right: 0.5rem;
     }
 
-    header .title {
+    .title {
       display: flex;
       align-items: center;
       font-size: 1.2rem;
       color: #3d8526;
       font-family: 'Press Start 2P', monospace;
+      letter-spacing: 0.5px;
     }
 
-    nav a {
-      margin-left: 1rem;
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    nav a, .toggle-btn {
       color: #3d8526;
       text-decoration: none;
       font-weight: bold;
@@ -63,11 +69,16 @@
       background: #2e3338;
       border: 2px solid #3d8526;
       transition: all 0.2s ease;
+      font-size: 0.9rem;
     }
 
-    nav a:hover {
+    nav a:hover, .toggle-btn:hover {
       background: #3d8526;
       color: #000;
+    }
+
+    .toggle-btn {
+      cursor: pointer;
     }
 
     section {
@@ -97,7 +108,7 @@
       z-index: -1;
     }
 
-    .hero .logo-hero {
+    .logo-hero {
       height: 80px;
       width: 80px;
       margin-bottom: 1rem;
@@ -107,6 +118,7 @@
       font-family: 'Press Start 2P', monospace;
       font-size: 3rem;
       color: #3d8526;
+      letter-spacing: 0.5px;
     }
 
     .hero p {
@@ -139,21 +151,24 @@
 
     .confetti-piece {
       position: absolute;
-      top: 0;
       width: 6px;
       height: 10px;
       background: #fff;
-      opacity: 0;
-      animation: fall 1s forwards;
+      opacity: 1;
+      animation: explode 1.2s ease-out forwards;
     }
 
-    @keyframes fall {
+    @keyframes explode {
       0% {
-        transform: translateY(0) rotate(0);
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-150px) scale(1.2);
         opacity: 1;
       }
       100% {
-        transform: translateY(300px) rotate(360deg);
+        transform: translateY(300px) scale(0.8);
         opacity: 0;
       }
     }
@@ -168,14 +183,30 @@
 
     .map iframe {
       width: 100%;
-      height: 500px;
+      height: 100vh;
       border: 4px solid #3d8526;
       box-shadow: 6px 6px 0 #000;
       transition: transform 0.3s;
     }
 
     .map iframe:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
+    }
+
+    .map-btn {
+      margin-top: 1rem;
+      background: #3d8526;
+      border: 2px solid #000;
+      padding: 0.5rem 1rem;
+      font-family: 'Press Start 2P', monospace;
+      color: #000;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .map-btn:hover {
+      transform: scale(1.05);
     }
 
     .wiki-category {
@@ -207,41 +238,77 @@
     .wavy {
       display: block;
       width: 100%;
-      height: 60px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60"><path fill="%2317181c" d="M0,20 C360,80 1080,-40 1440,20 L1440,60 L0,60 Z"/></svg>') no-repeat bottom;
+      height: 150px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg"><path fill="%233d8526" d="M0,80 C360,0 1080,160 1440,80 L1440,0 L0,0 Z"/></svg>') no-repeat center center;
+      background-size: cover;
+      animation: waveMove 4s infinite linear;
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    footer {
+      font-size: 0.9rem;
+      justify-content: center;
+      text-align: center;
+      color: #3d8526;
+    }
+
+    .light-mode {
+      background: #f0f0f0;
+      color: #000;
+    }
+
+    .light-mode header,
+    .light-mode footer {
+      background: #e0e0e0;
+    }
+
+    .light-mode nav a,
+    .light-mode .toggle-btn {
+      background: #ccc;
+      color: #000;
+      border-color: #000;
+    }
+
+    .light-mode .section-title,
+    .light-mode .title,
+    .light-mode .map-btn,
+    .light-mode .wiki-category h3 {
+      color: #2e6e18;
     }
 
     @media (max-width: 768px) {
       .hero h2 {
         font-size: 2rem;
       }
-
-      nav a {
-        margin-left: 0.5rem;
+      nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
-
       .map iframe {
-        height: 300px;
+        height: 500px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="title">
-      <img src="logo.png" class="logo" />
-      <span>Omni World</span>
-    </div>
+    <div class="title"><img src="logo.png" class="logo" /><span>Omni World</span></div>
     <nav>
       <a href="#home">Home</a>
       <a href="#map">Map</a>
       <a href="#wiki">Wiki</a>
+      <div class="toggle-btn" onclick="toggleMode()">Toggle Theme</div>
     </nav>
   </header>
 
   <section class="hero" id="home">
     <video autoplay muted loop>
-      <source src="trailer.mp4" type="video/mp4" />
+      <source src="trailer.mp4" type="video/mp4"/>
     </video>
     <img src="logo.png" class="logo-hero" />
     <h2>Omni World</h2>
@@ -255,28 +322,17 @@
     <h2 class="section-title">Map</h2>
     <div class="map">
       <iframe src="https://map.omwrld.com/" allowfullscreen></iframe>
+      <a class="map-btn" href="https://map.omwrld.com/" target="_blank">View Full Map</a>
     </div>
   </section>
 
   <section id="wiki">
     <h2 class="section-title">Wiki</h2>
-
-    <div class="wiki-category">
-      <h3>Mobs</h3>
-      <div class="wiki-sub">
-        <strong>Items & Drop Rates</strong><br />
-        Zombie: Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)
-      </div>
-    </div>
-
-    <div class="wiki-category">
-      <h3>Items</h3>
-      <div class="wiki-sub">
-        <strong>Stats</strong><br />
-        Mythril Sword - Damage: 12, Durability: 750, Special: Bleeding
-      </div>
-    </div>
+    <div class="wiki-category"><h3>Mobs</h3><div class="wiki-sub"><strong>Items & Drop Rates</strong><br>Zombies drop: Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)</div></div>
+    <div class="wiki-category"><h3>Items</h3><div class="wiki-sub"><strong>Stats</strong><br>Mythril Sword: Damage: 12, Durability: 750, Effect: Bleed</div></div>
   </section>
+
+  <footer>&copy; 2025 Omni World. All rights reserved.</footer>
 
   <script>
     function copyIP() {
@@ -286,20 +342,21 @@
 
     const btn = document.getElementById("discord-btn");
     btn.addEventListener("mouseenter", () => {
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 30; i++) {
         const confetti = document.createElement("div");
         confetti.classList.add("confetti-piece");
         confetti.style.left = Math.random() * 100 + "%";
         confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
-        confetti.style.animationDuration = 0.8 + Math.random() * 0.5 + "s";
+        confetti.style.animationDuration = 0.9 + Math.random() * 0.5 + "s";
         confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
         btn.appendChild(confetti);
-
-        setTimeout(() => {
-          confetti.remove();
-        }, 1000);
+        setTimeout(() => confetti.remove(), 1500);
       }
     });
+
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+    }
   </script>
 </body>
 </html>
