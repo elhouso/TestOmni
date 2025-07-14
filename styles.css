@@ -1,0 +1,120 @@
+@font-face {
+  font-family: 'Expressway';
+  src: url('./assets/Expressway-SemiBold.woff') format('woff');
+}
+
+:root {
+  --bg-dark: rgba(10, 10, 10, 0.95);
+  --bg-light: rgba(255, 255, 255, 0.85);
+  --text-dark: #fff;
+  --text-light: #111;
+  --accent: #5eead4;
+  --rounded: 15px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Expressway', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  transition: all 0.3s ease-in-out;
+  background-image: url('./assets/landingpicture.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: relative;
+  min-height: 100vh;
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 200px;
+  border-radius: var(--rounded);
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-item,
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: var(--rounded);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover,
+.theme-toggle:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+.nav-item.active {
+  background: var(--accent);
+  color: #000;
+}
+
+.theme-toggle {
+  margin-left: auto;
+}
+
+main {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.tab-content {
+  display: none;
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.5);
+  padding: 30px;
+  border-radius: var(--rounded);
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Light mode overrides */
+body.light {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+body.light .tab-content {
+  background: rgba(255,255,255,0.8);
+}
+
+body.light .nav-item,
+body.light .theme-toggle {
+  border-color: #333;
+  color: #333;
+}
+
+body.light .nav-item.active {
+  background: #333;
+  color: #fff;
+}
