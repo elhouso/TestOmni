@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Omni World - Minecraft Server</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
@@ -11,7 +11,6 @@
       src: url('Expressway-SemiBold.woff') format('woff');
       font-weight: 600;
       font-style: normal;
-      font-display: swap;
     }
 
     * {
@@ -21,342 +20,258 @@
     }
 
     body {
-      background-color: #171a1c;
-      color: #fff;
       font-family: 'ExpresswaySB', sans-serif;
-      overflow-x: hidden;
+      background-color: #181a1e;
+      color: #fff;
       cursor: url('cursor.png'), auto;
-      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+      font-size: 1.1rem;
     }
 
     header, footer {
-      position: relative;
-      width: 100%;
-      background: #212529;
+      background-color: #262930;
+      color: #4fcf3f;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 1rem 2rem;
-      z-index: 1000;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      font-family: 'Press Start 2P', monospace;
     }
 
-    .logo {
-      height: 32px;
-      width: 32px;
-      margin-right: 0.5rem;
-    }
-
-    .title {
+    header .title, footer .title {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
-      color: #3d8526;
-      font-family: 'Press Start 2P', monospace;
+      gap: 0.5rem;
+      font-size: 1rem;
       letter-spacing: 0.5px;
+    }
+
+    header .logo {
+      height: 36px;
     }
 
     nav {
       display: flex;
-      align-items: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
     nav a, .toggle-btn {
-      color: #3d8526;
+      background: #353942;
+      border: 2px solid #4fcf3f;
+      color: #4fcf3f;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      padding: 0.3rem 0.6rem;
-      background: #2e3338;
-      border: 2px solid #3d8526;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
     }
 
     nav a:hover, .toggle-btn:hover {
-      background: #3d8526;
+      background: #4fcf3f;
       color: #000;
-    }
-
-    .toggle-btn {
-      cursor: pointer;
-    }
-
-    section {
-      padding: 6rem 2rem 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
     .hero {
-      height: 100vh;
       position: relative;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
+      justify-content: flex-start;
+      background: url('landingpicture.png') center/cover no-repeat;
+      padding: 2rem;
     }
 
-    .hero video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.4);
-      z-index: -1;
+    .hero-box {
+      background: rgba(50, 50, 50, 0.8);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 480px;
+      z-index: 2;
     }
 
-    .logo-hero {
-      height: 80px;
-      width: 80px;
+    .hero h1 {
+      font-family: 'Press Start 2P', monospace;
+      color: #4fcf3f;
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
 
-    .hero h2 {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 3rem;
-      color: #3d8526;
-      letter-spacing: 0.5px;
-    }
-
     .hero p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero p:hover {
+      margin-bottom: 1rem;
       cursor: pointer;
-      text-decoration: underline;
     }
 
-    .btn-mc {
-      font-family: 'Press Start 2P', monospace;
-      background: #3d8526;
-      border: 2px solid #000;
-      color: #000;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
+    .btn-discord {
       display: inline-block;
-      box-shadow: 4px 4px 0 #000;
+      background: #4fcf3f;
+      color: #000;
+      font-family: 'Press Start 2P', monospace;
+      padding: 0.75rem 1.2rem;
+      border: 2px solid #000;
+      border-radius: 10px;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease;
-    }
-
-    .btn-mc:hover {
-      transform: translateY(-2px);
+      z-index: 1;
     }
 
     .confetti-piece {
-      position: absolute;
+      position: fixed;
       width: 6px;
       height: 10px;
-      background: #fff;
-      opacity: 1;
-      animation: explode 1.2s ease-out forwards;
+      background: red;
+      opacity: 0.9;
+      animation: explode 2s ease forwards;
+      z-index: 9999;
     }
 
     @keyframes explode {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(-150px) scale(1.2);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(300px) scale(0.8);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      50% { transform: translateY(-200px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+    }
+
+    .wave {
+      width: 100%;
+      height: 150px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%234fcf3f" fill-opacity="1" d="M0,64L48,80C96,96,192,128,288,133.3C384,139,480,117,576,106.7C672,96,768,96,864,106.7C960,117,1056,139,1152,144C1248,149,1344,139,1392,133.3L1440,128V320H0Z"></path></svg>');
+      background-size: cover;
+      animation: waveMotion 10s linear infinite;
+    }
+
+    @keyframes waveMotion {
+      0% { background-position-x: 0; }
+      100% { background-position-x: 1000px; }
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .section-title {
       font-family: 'Press Start 2P', monospace;
-      color: #3d8526;
-      font-size: 2rem;
-      text-align: center;
+      font-size: 1.5rem;
+      color: #4fcf3f;
       margin-bottom: 2rem;
     }
 
-    .map iframe {
+    iframe.discord {
       width: 100%;
-      height: 100vh;
-      border: 4px solid #3d8526;
-      box-shadow: 6px 6px 0 #000;
-      transition: transform 0.3s;
+      height: 500px;
+      border-radius: 10px;
+      border: 2px solid #4fcf3f;
     }
 
-    .map iframe:hover {
-      transform: scale(1.01);
+    iframe.map {
+      width: 100%;
+      height: 90vh;
+      border-radius: 10px;
+      border: 2px solid #4fcf3f;
     }
 
-    .map-btn {
-      margin-top: 1rem;
-      background: #3d8526;
-      border: 2px solid #000;
-      padding: 0.5rem 1rem;
-      font-family: 'Press Start 2P', monospace;
-      color: #000;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 3px 3px 0 #000;
-    }
-
-    .map-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .wiki-category {
-      background: #212529;
-      padding: 1rem 1.5rem;
-      margin-bottom: 2rem;
-      border-left: 6px solid #3d8526;
-      transition: transform 0.3s;
-    }
-
-    .wiki-category:hover {
-      transform: scale(1.02);
-    }
-
-    .wiki-category h3 {
-      font-family: 'Press Start 2P', monospace;
-      color: #3d8526;
-      margin-bottom: 1rem;
-    }
-
-    .wiki-sub {
-      margin-left: 1rem;
-      background: #2e3338;
-      padding: 0.75rem 1rem;
-      border: 2px solid #000;
-      box-shadow: 4px 4px 0 #000;
-    }
-
-    .wavy {
+    .youtube-embed {
+      margin-top: 4rem;
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      border-radius: 10px;
       display: block;
-      width: 100%;
-      height: 150px;
-      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg"><path fill="%233d8526" d="M0,80 C360,0 1080,160 1440,80 L1440,0 L0,0 Z"/></svg>') no-repeat center center;
-      background-size: cover;
-      animation: waveMove 4s infinite linear;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    @keyframes waveMove {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
+    .wiki-entry {
+      background: #2f333a;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #4fcf3f;
     }
 
     footer {
-      font-size: 0.9rem;
       justify-content: center;
+      font-size: 1rem;
       text-align: center;
-      color: #3d8526;
-    }
-
-    .light-mode {
-      background: #f0f0f0;
-      color: #000;
-    }
-
-    .light-mode header,
-    .light-mode footer {
-      background: #e0e0e0;
-    }
-
-    .light-mode nav a,
-    .light-mode .toggle-btn {
-      background: #ccc;
-      color: #000;
-      border-color: #000;
-    }
-
-    .light-mode .section-title,
-    .light-mode .title,
-    .light-mode .map-btn,
-    .light-mode .wiki-category h3 {
-      color: #2e6e18;
     }
 
     @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 2rem;
+      .hero {
+        justify-content: center;
+        text-align: center;
       }
-      nav {
-        flex-wrap: wrap;
-        gap: 0.5rem;
+
+      .hero-box {
+        margin: 0 auto;
       }
-      .map iframe {
-        height: 500px;
+
+      .youtube-embed {
+        height: 300px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="title"><img src="logo.png" class="logo" /><span>Omni World</span></div>
+    <div class="title"><img src="logo.png" class="logo">Omni World</div>
     <nav>
       <a href="#home">Home</a>
+      <a href="#discord">Discord</a>
       <a href="#map">Map</a>
       <a href="#wiki">Wiki</a>
-      <div class="toggle-btn" onclick="toggleMode()">Toggle Theme</div>
+      <div class="toggle-btn" onclick="document.body.classList.toggle('light')">Toggle Theme</div>
     </nav>
   </header>
 
   <section class="hero" id="home">
-    <video autoplay muted loop>
-      <source src="trailer.mp4" type="video/mp4"/>
-    </video>
-    <img src="logo.png" class="logo-hero" />
-    <h2>Omni World</h2>
-    <p onclick="copyIP()">IP: <strong id="ip">OmWrld.com</strong></p>
-    <a class="btn-mc" href="#" id="discord-btn">Join Our Discord</a>
+    <div class="hero-box">
+      <h1>Omni World</h1>
+      <p onclick="copyIP()">IP: <strong>OmWrld.com</strong></p>
+      <a class="btn-discord" id="discord-btn" href="https://discord.gg/yourinvite" target="_blank">Join Our Discord</a>
+    </div>
   </section>
 
-  <div class="wavy"></div>
+  <div class="wave"></div>
+
+  <iframe class="youtube-embed" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+
+  <section id="discord">
+    <h2 class="section-title">Discord</h2>
+    <iframe class="discord" src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark" allowtransparency="true" frameborder="0"></iframe>
+  </section>
 
   <section id="map">
     <h2 class="section-title">Map</h2>
-    <div class="map">
-      <iframe src="https://map.omwrld.com/" allowfullscreen></iframe>
-      <a class="map-btn" href="https://map.omwrld.com/" target="_blank">View Full Map</a>
-    </div>
+    <iframe class="map" src="https://map.omwrld.com/" allowfullscreen></iframe>
   </section>
 
   <section id="wiki">
     <h2 class="section-title">Wiki</h2>
-    <div class="wiki-category"><h3>Mobs</h3><div class="wiki-sub"><strong>Items & Drop Rates</strong><br>Zombies drop: Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)</div></div>
-    <div class="wiki-category"><h3>Items</h3><div class="wiki-sub"><strong>Stats</strong><br>Mythril Sword: Damage: 12, Durability: 750, Effect: Bleed</div></div>
+    <div class="wiki-entry"><strong>Mobs:</strong> Zombie drops Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)</div>
+    <div class="wiki-entry"><strong>Items:</strong> Mythril Sword - Damage: 12, Durability: 750, Effect: Bleed</div>
   </section>
 
-  <footer>&copy; 2025 Omni World. All rights reserved.</footer>
+  <footer>
+    <div class="title">&copy; 2025 Omni World. All rights reserved.</div>
+  </footer>
 
   <script>
     function copyIP() {
-      navigator.clipboard.writeText("OmWrld.com");
-      alert("IP copied to clipboard!");
+      navigator.clipboard.writeText('OmWrld.com');
+      alert('IP copied to clipboard!');
     }
 
-    const btn = document.getElementById("discord-btn");
-    btn.addEventListener("mouseenter", () => {
-      for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti-piece");
-        confetti.style.left = Math.random() * 100 + "%";
-        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
-        confetti.style.animationDuration = 0.9 + Math.random() * 0.5 + "s";
-        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-        btn.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1500);
+    document.getElementById('discord-btn').addEventListener('click', function (e) {
+      for (let i = 0; i < 50; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.left = Math.random() * window.innerWidth + 'px';
+        c.style.top = (window.innerHeight / 2 - 50) + 'px';
+        c.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
       }
     });
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-    }
   </script>
 </body>
 </html>
