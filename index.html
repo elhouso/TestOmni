@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Omni World - Minecraft Server</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.css" />
   <style>
     @font-face {
       font-family: 'ExpresswaySB';
@@ -48,7 +48,7 @@
 
     body.light header, body.light footer {
       background-color: #ddd;
-      color: #2a8a1f;
+      color: #000;
     }
 
     header .title, footer .title {
@@ -81,12 +81,13 @@
       align-items: center;
       gap: 0.4rem;
       transition: background 0.3s, color 0.3s;
+      cursor: pointer;
     }
 
     body.light nav a, body.light .toggle-btn {
       background: #ccc;
       color: #000;
-      border-color: #2a8a1f;
+      border-color: #000;
     }
 
     nav a:hover, .toggle-btn:hover {
@@ -94,22 +95,21 @@
       color: #000;
     }
 
+    body.light nav a:hover, body.light .toggle-btn:hover {
+      background: #000;
+      color: #4fcf3f;
+    }
+
     .hero {
       position: relative;
       height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: url('landingpicture.png') center/cover no-repeat;
+      justify-content: flex-start;
+      background: url('landingpicture.png') no-repeat center center / cover;
       padding: 2rem;
-    }
-
-    .hero-content {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
+      min-width: 320px;
+      min-height: 568px;
     }
 
     .hero-box {
@@ -117,17 +117,29 @@
       padding: 2rem;
       border-radius: 12px;
       max-width: 480px;
+      color: #4fcf3f;
+      font-weight: 600;
+      cursor: default;
     }
 
     body.light .hero-box {
       background: rgba(240, 240, 240, 0.9);
+      color: #000;
     }
 
     .hero h1 {
       font-family: 'Press Start 2P', monospace;
-      color: #4fcf3f;
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: inherit;
+    }
+
+    .hero p {
+      margin-bottom: 1rem;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.2rem;
+      color: inherit;
     }
 
     .btn-discord {
@@ -139,27 +151,38 @@
       border: 2px solid #000;
       border-radius: 10px;
       text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s, color 0.3s;
     }
 
-    .ip-box {
+    .btn-discord:hover {
+      background: #3d8526;
+      color: #fff;
+    }
+
+    body.light .btn-discord {
+      background: #000;
+      color: #4fcf3f;
+      border-color: #4fcf3f;
+    }
+
+    body.light .btn-discord:hover {
       background: #4fcf3f;
       color: #000;
-      border-radius: 10px;
-      padding: 1rem;
-      font-weight: bold;
-      font-family: 'Press Start 2P', monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      border: 2px solid #000;
     }
 
     .divider {
       width: 100%;
       height: 4px;
       background: #4fcf3f;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      transition: background 0.3s;
+    }
+
+    body.light .divider {
+      background: #000;
     }
 
     section {
@@ -173,6 +196,11 @@
       font-size: 1.5rem;
       color: #4fcf3f;
       margin-bottom: 2rem;
+      transition: color 0.3s;
+    }
+
+    body.light .section-title {
+      color: #000;
     }
 
     iframe.discord {
@@ -180,6 +208,11 @@
       height: 500px;
       border-radius: 10px;
       border: 2px solid #4fcf3f;
+      transition: border-color 0.3s;
+    }
+
+    body.light iframe.discord {
+      border-color: #000;
     }
 
     iframe.map {
@@ -187,6 +220,11 @@
       height: 90vh;
       border-radius: 10px;
       border: 2px solid #4fcf3f;
+      transition: border-color 0.3s;
+    }
+
+    body.light iframe.map {
+      border-color: #000;
     }
 
     .youtube-embed {
@@ -199,57 +237,61 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      transition: border-color 0.3s;
     }
 
-    .wiki-entry {
-      background: #2f333a;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid #4fcf3f;
+    body.light .youtube-embed {
+      border-color: #000;
     }
 
     footer {
       justify-content: center;
       font-size: 1rem;
       text-align: center;
+      background-color: #262930;
+      color: #4fcf3f;
+      padding: 1rem 2rem;
+      font-family: 'Press Start 2P', monospace;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light footer {
+      background-color: #ddd;
+      color: #000;
     }
 
     @media (max-width: 768px) {
-      .hero-content {
-        flex-direction: column;
+      .hero {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero-box {
+        margin: 0 auto;
       }
 
       .youtube-embed {
         height: 300px;
-      }
-
-      .ip-box {
-        writing-mode: horizontal-tb;
-        padding: 0.5rem 1rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="title"><img src="logo.png" class="logo">Omni World</div>
+    <div class="title"><img src="logo.png" class="logo" alt="Omni World Logo" /> Omni World</div>
     <nav>
       <a href="#home"><i data-lucide="home"></i> Home</a>
       <a href="#discord"><i data-lucide="discord"></i> Discord</a>
       <a href="#map"><i data-lucide="globe"></i> Map</a>
-      <a href="#wiki"><i data-lucide="book"></i> Wiki</a>
       <div class="toggle-btn" onclick="toggleTheme()"><i data-lucide="sun-moon"></i> Theme</div>
     </nav>
   </header>
 
   <section class="hero" id="home">
-    <div class="hero-content">
-      <div class="hero-box">
-        <h1>Omni World</h1>
-        <a class="btn-discord" href="https://discord.gg/yourinvite" target="_blank">Join Our Discord</a>
-      </div>
-      <div class="ip-box">OmWrld.com</div>
+    <div class="hero-box">
+      <h1>Omni World</h1>
+      <p onclick="copyIP()">IP: <strong>OmWrld.com</strong></p>
+      <a class="btn-discord" href="https://discord.gg/yourinvite" target="_blank" rel="noopener noreferrer">Join Our Discord</a>
     </div>
   </section>
 
@@ -259,18 +301,18 @@
 
   <section id="discord">
     <h2 class="section-title">Discord</h2>
-    <iframe class="discord" src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark" allowtransparency="true" frameborder="0"></iframe>
+    <iframe
+      class="discord"
+      src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark"
+      allowtransparency="true"
+      frameborder="0"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+    ></iframe>
   </section>
 
   <section id="map">
     <h2 class="section-title">Map</h2>
     <iframe class="map" src="https://map.omwrld.com/" allowfullscreen></iframe>
-  </section>
-
-  <section id="wiki">
-    <h2 class="section-title">Wiki</h2>
-    <div class="wiki-entry"><strong>Mobs:</strong> Zombie drops Rotten Flesh (90%), Iron Ingot (2%), Rare Sword (0.5%)</div>
-    <div class="wiki-entry"><strong>Items:</strong> Mythril Sword - Damage: 12, Durability: 750, Effect: Bleed</div>
   </section>
 
   <footer>
@@ -281,8 +323,14 @@
   <script>
     lucide.createIcons();
 
+    function copyIP() {
+      navigator.clipboard.writeText('OmWrld.com');
+      alert('IP copied to clipboard!');
+    }
+
     function toggleTheme() {
-      document.body.classList.toggle("light");
+      document.body.classList.toggle('light');
+      // Swap green to black in light mode by toggling body class
     }
   </script>
 </body>
