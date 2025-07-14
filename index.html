@@ -1,337 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Omni World - Minecraft Server</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.css" />
+  <meta charset="UTF-8">
+  <title>Omni World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'ExpresswaySB';
-      src: url('Expressway-SemiBold.woff') format('woff');
-      font-weight: 600;
-      font-style: normal;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'ExpresswaySB', sans-serif;
-      background-color: #181a1e;
-      color: #fff;
-      cursor: url('cursor.png'), auto;
-      overflow-x: hidden;
-      font-size: 1.1rem;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.light {
-      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      background: #fff;
       color: #000;
     }
 
-    header, footer {
-      background-color: #262930;
-      color: #4fcf3f;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-      font-family: 'Press Start 2P', monospace;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.light header, body.light footer {
-      background-color: #ddd;
-      color: #000;
-    }
-
-    header .title, footer .title {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-    }
-
-    header .logo {
-      height: 36px;
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    nav a, .toggle-btn {
-      background: #353942;
-      border: 2px solid #4fcf3f;
-      color: #4fcf3f;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
+    h1 {
+      font-family: 'Playfair Display', serif;
       font-weight: bold;
+      font-style: italic;
+      margin: 30px 0 10px;
+    }
+
+    .nav {
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      padding: 15px 0;
       display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: background 0.3s, color 0.3s;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .nav-item {
       cursor: pointer;
+      padding: 5px 10px;
     }
 
-    body.light nav a, body.light .toggle-btn {
-      background: #ccc;
-      color: #000;
-      border-color: #000;
-    }
-
-    nav a:hover, .toggle-btn:hover {
-      background: #4fcf3f;
-      color: #000;
-    }
-
-    body.light nav a:hover, body.light .toggle-btn:hover {
-      background: #000;
-      color: #4fcf3f;
-    }
-
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      background: url('landingpicture.png') no-repeat center center / cover;
-      padding: 2rem;
-      min-width: 320px;
-      min-height: 568px;
-    }
-
-    .hero-box {
-      background: rgba(50, 50, 50, 0.8);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 480px;
-      color: #4fcf3f;
-      font-weight: 600;
-      cursor: default;
-    }
-
-    body.light .hero-box {
-      background: rgba(240, 240, 240, 0.9);
-      color: #000;
-    }
-
-    .hero h1 {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: inherit;
-    }
-
-    .hero p {
-      margin-bottom: 1rem;
-      cursor: pointer;
-      user-select: none;
-      font-size: 1.2rem;
-      color: inherit;
-    }
-
-    .btn-discord {
-      display: inline-block;
-      background: #4fcf3f;
-      color: #000;
-      font-family: 'Press Start 2P', monospace;
-      padding: 0.75rem 1.2rem;
-      border: 2px solid #000;
-      border-radius: 10px;
-      text-decoration: none;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .btn-discord:hover {
-      background: #3d8526;
-      color: #fff;
-    }
-
-    body.light .btn-discord {
-      background: #000;
-      color: #4fcf3f;
-      border-color: #4fcf3f;
-    }
-
-    body.light .btn-discord:hover {
-      background: #4fcf3f;
-      color: #000;
+    .nav-item.active {
+      background: black;
+      color: white;
     }
 
     .divider {
-      width: 100%;
-      height: 4px;
-      background: #4fcf3f;
-      margin-top: 0;
-      margin-bottom: 2rem;
-      transition: background 0.3s;
+      color: black;
     }
 
-    body.light .divider {
-      background: #000;
+    .content {
+      margin-top: 40px;
+      font-size: 18px;
+      padding: 0 20px;
     }
 
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 1.5rem;
-      color: #4fcf3f;
-      margin-bottom: 2rem;
-      transition: color 0.3s;
-    }
-
-    body.light .section-title {
-      color: #000;
-    }
-
-    iframe.discord {
-      width: 100%;
-      height: 500px;
-      border-radius: 10px;
-      border: 2px solid #4fcf3f;
-      transition: border-color 0.3s;
-    }
-
-    body.light iframe.discord {
-      border-color: #000;
-    }
-
-    iframe.map {
-      width: 100%;
-      height: 90vh;
-      border-radius: 10px;
-      border: 2px solid #4fcf3f;
-      transition: border-color 0.3s;
-    }
-
-    body.light iframe.map {
-      border-color: #000;
-    }
-
-    .youtube-embed {
-      margin-top: 4rem;
-      width: 100%;
-      max-width: 800px;
-      height: 450px;
-      border-radius: 10px;
-      border: 2px solid #4fcf3f;
-      display: block;
+    .content p {
+      margin-bottom: 12px;
+      max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-      transition: border-color 0.3s;
-    }
-
-    body.light .youtube-embed {
-      border-color: #000;
-    }
-
-    footer {
-      justify-content: center;
-      font-size: 1rem;
-      text-align: center;
-      background-color: #262930;
-      color: #4fcf3f;
-      padding: 1rem 2rem;
-      font-family: 'Press Start 2P', monospace;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.light footer {
-      background-color: #ddd;
-      color: #000;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .hero-box {
-        margin: 0 auto;
-      }
-
-      .youtube-embed {
-        height: 300px;
-      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="title"><img src="logo.png" class="logo" alt="Omni World Logo" /> Omni World</div>
-    <nav>
-      <a href="#home"><i data-lucide="home"></i> Home</a>
-      <a href="#discord"><i data-lucide="discord"></i> Discord</a>
-      <a href="#map"><i data-lucide="globe"></i> Map</a>
-      <div class="toggle-btn" onclick="toggleTheme()"><i data-lucide="sun-moon"></i> Theme</div>
-    </nav>
-  </header>
 
-  <section class="hero" id="home">
-    <div class="hero-box">
-      <h1>Omni World</h1>
-      <p onclick="copyIP()">IP: <strong>OmWrld.com</strong></p>
-      <a class="btn-discord" href="https://discord.gg/yourinvite" target="_blank" rel="noopener noreferrer">Join Our Discord</a>
-    </div>
-  </section>
+  <h1>Omni World</h1>
 
-  <div class="divider"></div>
+  <div class="nav">
+    <div id="wiki-tab" class="nav-item active" onclick="showContent('wiki')">WIKI</div>
+    <span class="divider">|</span>
+    <div id="discord-tab" class="nav-item" onclick="showContent('discord')">DISCORD</div>
+    <span class="divider">|</span>
+    <div id="map-tab" class="nav-item" onclick="showContent('map')">MAP</div>
+  </div>
 
-  <iframe class="youtube-embed" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+  <div id="wiki" class="content">
+    <p>Traditional crawling wiki I can add items, mobs, features and their characteristics.</p>
+    <p>Also a place to sort out server commands for:</p>
+    <p>Teleports<br>Residents<br>Towns<br>Nations</p>
+  </div>
 
-  <section id="discord">
-    <h2 class="section-title">Discord</h2>
-    <iframe
-      class="discord"
-      src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark"
-      allowtransparency="true"
-      frameborder="0"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-    ></iframe>
-  </section>
+  <div id="discord" class="content" style="display: none;">
+    <p>Discord link and a brief lore of the Legend and Legacy ranks for content</p>
+  </div>
 
-  <section id="map">
-    <h2 class="section-title">Map</h2>
-    <iframe class="map" src="https://map.omwrld.com/" allowfullscreen></iframe>
-  </section>
+  <div id="map" class="content" style="display: none;">
+    <p>Insert server trailer vid here</p>
+  </div>
 
-  <footer>
-    <div class="title">&copy; 2025 Omni World. All rights reserved.</div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
   <script>
-    lucide.createIcons();
-
-    function copyIP() {
-      navigator.clipboard.writeText('OmWrld.com');
-      alert('IP copied to clipboard!');
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-      // Swap green to black in light mode by toggling body class
+    function showContent(tab) {
+      const tabs = ['wiki', 'discord', 'map'];
+      tabs.forEach(t => {
+        document.getElementById(t).style.display = 'none';
+        document.getElementById(t + '-tab').classList.remove('active');
+      });
+      document.getElementById(tab).style.display = 'block';
+      document.getElementById(tab + '-tab').classList.add('active');
     }
   </script>
+
 </body>
 </html>
