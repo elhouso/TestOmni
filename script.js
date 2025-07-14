@@ -1,24 +1,27 @@
 const tabs = document.querySelectorAll('.nav-item');
-const sections = document.querySelectorAll('.tab-content');
+const sections = document.querySelectorAll('.content');
 const themeToggle = document.getElementById('themeToggle');
 
-tabs.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Set page title
-    document.title = `Omni World - ${btn.textContent.charAt(0).toUpperCase() + btn.textContent.slice(1).toLowerCase()}`;
-    
-    tabs.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    // Set tab active state
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
 
-    sections.forEach(sec => {
-      sec.classList.remove('active');
-      if (sec.id === btn.dataset.tab) sec.classList.add('active');
+    // Show corresponding content
+    const page = tab.dataset.page;
+    sections.forEach(section => {
+      section.style.display = section.id === page ? 'block' : 'none';
     });
+
+    // Update page title
+    document.title = `Omni World - ${page.charAt(0).toUpperCase() + page.slice(1)}`;
   });
 });
 
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('light');
   document.body.classList.toggle('dark');
+
   themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
 });
